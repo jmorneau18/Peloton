@@ -1,0 +1,34 @@
+<!-- 
+	Pre: Must have chrome installed on computer where you are running Task2.html
+	To run: in folder double click on Task2.html -> will automatically open in browser
+	Post: when loaded in chrome, in the text box type a city you would like to know the 
+		current max and min temperature of and click "Get Max and Min"
+		* the max and min current temperature of the city you typed in will be displayed
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Weather</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+		
+	    function gettingJSON(){
+	    	var apiKey = "fe27b9b2ef3c090c67162a067d0336d9";
+
+	        $.getJSON("http://api.openweathermap.org/data/2.5/weather?q="+document.getElementById("cityname").value+"&APPID=" + apiKey,function(json){
+	        		var minTemp = JSON.stringify(json.main.temp_min);
+	        		var maxTemp = JSON.stringify(json.main.temp_max); 
+	        		document.write("THE MIN AND MAX TEMPERATURES FOR " + document.getElementById("cityname").value + " ARE: <BR>")
+	        		document.write("MIN TEMPERATURE = " + minTemp + "<br>");
+	        		document.write("MAX TEMPERATURE = " + maxTemp);
+	        });
+	    }
+    </script>
+</head>
+	<body>
+		<h3>Enter a city name below where you would like to know the max and min of the current weather :)</h3><br>
+		<input type="text" name="CityName" id="cityname">Enter City Name:<br></input>
+		<button id = "getJSON" onclick = "gettingJSON()">Get Max and Min</button>
+	</body>
+</html>
